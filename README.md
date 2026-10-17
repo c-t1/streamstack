@@ -7,7 +7,8 @@ with your own star rating for each title.
 
 **Demo login:** `demo@streamstack.dev` / `streamstack-demo` (pre-loaded with a few tracked titles)
 
-Springboard Software Engineering capstone. Proposal and planning docs are in [`docs/`](docs/).
+Springboard Software Engineering capstone. Planning docs:
+[Step 1 project ideas](docs/project-ideas.md) · [Step 2 project proposal](docs/project-proposal.md)
 
 ---
 
