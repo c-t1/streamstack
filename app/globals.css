@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+/* Design tokens. Components use these variables, so dark mode only has to
+   redefine the values here. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f7f8;
+  --surface: #ffffff;
+  --foreground: #18181b;
+  --muted: #6b6b76;
+  --border: #e4e4e7;
+  --accent: #e11d48;
+  --accent-contrast: #ffffff;
+  --success: #15803d;
+  --danger: #b91c1c;
 }
 
 @theme inline {
@@ -14,13 +23,169 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0b0b0e;
+    --surface: #16161b;
+    --foreground: #ededf0;
+    --muted: #a1a1aa;
+    --border: #2a2a31;
+    --accent: #fb7185;
+    --accent-contrast: #18181b;
+    --success: #4ade80;
+    --danger: #f87171;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Reusable component classes, written in plain CSS. */
+@layer components {
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .input {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    color: var(--foreground);
+    min-width: 0;
+  }
+  .input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: opacity 0.15s, background 0.15s;
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+  .btn-primary:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+  .btn-secondary {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--foreground);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--background);
+  }
+  .btn-done {
+    background: transparent;
+    border-color: var(--success);
+    color: var(--success);
+    cursor: default;
+  }
+  .btn-danger {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--danger);
+    padding: 0.3rem 0.6rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .nav-link:hover,
+  .nav-link-active {
+    color: var(--foreground);
+  }
+  .nav-link-active {
+    font-weight: 600;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0 0.45rem;
+  }
+
+  .chip {
+    font-size: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+  }
+
+  .poster {
+    display: block;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    background: var(--border);
+  }
+  .poster-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 2 / 3;
+    border-radius: 0.5rem;
+    background: var(--border);
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .provider {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--surface);
+  }
+
+  .star {
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0.1rem;
+    color: var(--border);
+    cursor: pointer;
+  }
+  .star-filled {
+    color: #f59e0b;
+  }
+
+  .tab {
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+  }
+  .tab-active {
+    background: var(--foreground);
+    color: var(--background);
+    border-color: var(--foreground);
+  }
 }
